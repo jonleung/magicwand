@@ -21,6 +21,15 @@ app.get('/app-interface.js', function (req, res) {
 });
 
 
+var normalize_angle = function (degrees) {
+  if (degrees > 0){
+    return degrees;
+  }
+  else {
+    return 360 + degrees;
+  }
+};
+
 io.sockets.on('connection', function (socket) {
   socket.on('register', function (data) {
     // Client computer registration
@@ -28,7 +37,7 @@ io.sockets.on('connection', function (socket) {
     console.log(data);
   });
   socket.on('degrees', function (data) {
-    console.log('Current rotation = ' + data.rotation);
+    console.log('Current rotation = ' + normalize_angle(data.rotation));
   });
   socket.on('calibrate', function(data) {
     // Wand calibration
