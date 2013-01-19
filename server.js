@@ -49,7 +49,7 @@ io.sockets.on('connection', function (client) {
   });
   
   client.on('degrees', function (data) {
-    console.log('Current rotation = ' + normalize_angle(data.rotation));
+    console.log('Current rotation = ' + data.rotation);
   });
   
   client.on('calibrate', function(data) {

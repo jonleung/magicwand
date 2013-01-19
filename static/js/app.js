@@ -1,4 +1,4 @@
-var polar, init_angle;
+var angle, init_angle;
 
 var global = (function () { return this; }());
 (function () {
@@ -29,29 +29,27 @@ var global = (function () { return this; }());
       w('r-gamma', ev.rotationRate.gamma);
     }
 
-    function toPolarCoordinates(theta) {
-      var t = theta
-      if (t > 180) {
-        t = (t-360)*-1
+    function normalizeAngle(theta) {
+      if (theta > 180) {
+        theta = (theta - 360) * -1;
       }
       else {
-        t *= -1
+        theta *= -1;
       }
-      return t
+      return theta;
     }
 
     function handleDeviceOrientation(ev) {
       var actual = ev.alpha
       w('a', "actual:" + actual);
 
-      polar = toPolarCoordinates(actual)
+      angle = normalizeAngle(actual)
+
       if (typeof init_angle === 'undefined') {
-        init_angle = polar;
+        init_angle = angle;
       }
-      else {
-        polar -= init_angle;
-      }
-      w('b', "polar:" + polar);
+
+      w('b', "angle:" + angle);
 
       
       w('beta', ev.beta);
@@ -83,8 +81,8 @@ $(document).ready(function() {
   }).bind("hold release", function(e){
     if(e.type == "hold") {
         $("#initialize").css({background: "red"})
-        $("#values").prepend("<p>"+polar+"<p>")
-        post_degrees(polar)
+        $("#values").prepend("<p>"+angle+"<p>")
+        post_degrees(angle)
     }
     if(e.type == "release") {
         $("#initialize").css({background: "green"})
@@ -93,11 +91,11 @@ $(document).ready(function() {
   })
 
   $("#calibrate").hammer().bind("hold", function(e){
-    start_angle = polar;
+    start_angle = angle;
   });
 
   $("#calibrate").hammer().bind("release", function(e){
-    end_angle = polar;
+    end_angle = angle;
     post_calibrate(start_angle, end_angle);
   });
 
