@@ -8,3 +8,16 @@ body {
 	border: 0;
 	margin: 0;
 }
+
+.screenbox {
+	border:1px solid gray;
+	float: left;
+	background-color: green;
+	box-sizing: border-box;
+	opacity: 0;
+}
+
+#screensarea {
+	background: rgb(240, 240, 240);
+	box-sizing: border-box;
+}

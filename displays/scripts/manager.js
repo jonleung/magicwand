@@ -3,7 +3,7 @@ var EffectsManager = function(params) {
 
 	this.container = params.el;
 	window.c = this.container;
-	var defaultbg = "black";
+	var defaultbg = ["green"] || params.defaultbg;
 	soundManager.setup({
   		url: 'swf/',
 	});
@@ -47,11 +47,12 @@ EffectsManager.prototype.fade = function(speed, duration) { // duration is in ms
 	var iterations = Math.ceil(duration/(speed * 2));
 	console.log(iterations);
 
+	$(this.container).css("opacity", 1);
 	for (var i = 0; i < iterations; i++) {
 		(function(i){
 			setTimeout(function(){
-				$(_this.container).fadeOut(speed, function(){
-					$(_this.container).fadeIn(speed, function(){
+				$(_this.container).fadeIn(speed, function(){
+					$(_this.container).fadeOut(speed, function(){
 					});
 				});
 			}, i * speed);
