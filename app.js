@@ -77,6 +77,7 @@ $(document).ready(function() {
     if(e.type == "hold") {
         $("#initialize").css({background: "red"})
         $("#values").prepend("<p>"+polar+"<p>")
+        post_degrees(polar)
     }
     if(e.type == "release") {
         $("#initialize").css({background: "green"})
