@@ -1,4 +1,4 @@
-var angle, init_angle;
+var angle, init_angle, sendSection = false;
 
 var global = (function () { return this; }());
 (function () {
@@ -49,6 +49,10 @@ var global = (function () { return this; }());
         init_angle = angle;
       }
 
+      if(sendSection) {
+      post_section(getSection(angle));
+      }
+
       w('b', "angle:" + angle);
 
       
@@ -73,6 +77,39 @@ var global = (function () { return this; }());
 
 var start_angle, end_angle;
 
+function getSection(angle) {
+  if(angle < 0) { //Section 1/2
+    if(angle < start_angle / 2) { //Section 1
+      return 1;
+    }
+    else { //Section 2
+      return 2;
+    }
+  }
+  else { //Section 3/4
+    if(angle < end_angle / 2) { // Section 3
+      return 3;
+    }
+    else { // Section 4
+      return 4;
+    }
+  }
+}
+
+function activate_section() {
+  var timeout;
+  $("#send-angle").hammer({ hold_timeout: 0 }).bind("hold", function(e){
+    $("#values").prepend("<p>" + angle + " = " + getSection(angle));
+    sendSection = true;
+    return false;
+  });
+  $("#send-angle").hammer().bind("release", function(e){
+    $("#values").prepend("<p>clearing!</p>" + timeout);
+    sendSection = false;
+    return false;
+  });
+}
+
 $(document).ready(function() {
 
 
@@ -80,9 +117,9 @@ $(document).ready(function() {
     hold_timeout: 0
   }).bind("hold release", function(e){
     if(e.type == "hold") {
-        $("#initialize").css({background: "red"})
-        $("#values").prepend("<p>"+angle+"<p>")
-        post_degrees(angle)
+        $("#initialize").css({background: "red"});
+        $("#values").prepend("<p>"+angle+"<p>");
+        post_degrees(angle);
     }
     if(e.type == "release") {
         $("#initialize").css({background: "green"})
@@ -90,13 +127,14 @@ $(document).ready(function() {
 
   })
 
-  $("#calibrate").hammer().bind("hold", function(e){
+  $("#calibrate").hammer({ hold_timeout: 0 }).bind("hold", function(e){
     start_angle = angle;
   });
 
   $("#calibrate").hammer().bind("release", function(e){
     end_angle = angle;
     post_calibrate(start_angle, end_angle);
+    activate_section();
   });
 
 });
