@@ -3,6 +3,12 @@ var app = express()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server);
 
+
+//io.disable('heartbeats');
+io.set('heartbeat timeout', 300);
+io.set('heartbeat interval', 150);
+
+
 app.use("/static", express.static(__dirname + '/static'));
 
 var PORT = 8080;
@@ -15,6 +21,11 @@ app.get('/', function (req, res) {
 
 app.get('/phone', function (req, res) {
   res.sendfile(__dirname + '/index.html');
+});
+
+app.get('/testcomp/:section', function(req, res) {
+  var section = req.params.section;
+  res.sendfile(__dirname + '/computer' + section + '.html');
 });
 
 app.get('/test/:group?', function(req, res) {
@@ -49,7 +60,12 @@ io.sockets.on('connection', function (client) {
   });
   
   client.on('degrees', function (data) {
-    console.log('Current rotation = ' + data.rotation);
+    console.log(data);
+  });
+
+  client.on('section', function (data) {
+    group = data.section;
+    io.sockets.in(group).volatile.emit('event', data);
   });
   
   client.on('calibrate', function(data) {
