@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+  <title>Pusher Test</title>
+  <script src="http://js.pusher.com/1.12/pusher.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) window.console.log(message);
+    };
+
+    // Flash fallback logging - don't include this in production
+    WEB_SOCKET_DEBUG = true;
+
+    var BASE_URL = 'http://magicwand1337.v2.localtunnel.com';
+    
+    var pusher = new Pusher('bd45d2f7ca11c6ced15e');
+    Pusher.channel_auth_endpoint = BASE_URL + '/pusher/auth';
+    
+    var channel = pusher.subscribe('private-test');
+    channel.bind('my_event', function(data) {
+      alert(data);
+    });
+    channel.trigger("client-test", {"hello": "there"});
+  </script>
+</head>
