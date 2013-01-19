@@ -19,8 +19,8 @@ app.get('/phone', function (req, res) {
 
 app.get('/test/:group?', function(req, res) {
   io.sockets.in('all').volatile.emit('event', { test: 'all' });
-  var group = req.params.group;
-  io.sockets.in('' + group).volatile.emit('event', { test: group });
+  var group = req.params.group.toString();
+  io.sockets.in(group).volatile.emit('event', { test: group });
   res.end();
 });
 
