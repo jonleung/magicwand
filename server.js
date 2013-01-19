@@ -17,12 +17,11 @@ app.get('/phone', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-app.get('/app.js', function (req, res) {
-  res.sendfile(__dirname + '/app.js');
-});
-
-app.get('/app-interface.js', function (req, res) {
-  res.sendfile(__dirname + '/app-interface.js');
+app.get('/test/:group?', function(req, res) {
+  io.sockets.in('all').volatile.emit('event', { test: 'all' });
+  var group = req.params.group;
+  io.sockets.in('' + group).volatile.emit('event', { test: group });
+  res.end();
 });
 
 
@@ -37,28 +36,37 @@ var normalize_angle = function (degrees) {
 
 var start_angle, end_angle;
 
-io.sockets.on('connection', function (socket) {
-  socket.on('register', function (data) {
+io.sockets.on('connection', function (client) {
+  // Add them to all group
+  client.join('all');
+  
+  client.on('register', function (data) {
     // Client computer registration
+    // data = { section: 2 }
     console.log('register');
     console.log(data);
+    client.join(data.section);
   });
-  socket.on('degrees', function (data) {
+  
+  client.on('degrees', function (data) {
     console.log('Current rotation = ' + normalize_angle(data.rotation));
   });
-  socket.on('calibrate', function(data) {
+  
+  client.on('calibrate', function(data) {
     // Wand calibration
     console.log('calibrate');
     console.log(data);
     start_angle = data.start_angle;
     end_angle = data.end_angle;
   });
-  socket.on('hold', function(data) {
+  
+  client.on('hold', function(data) {
     // Wand hold button
     console.log('hold');
     console.log(data);
   });
-  socket.on('click', function(data) {
+  
+  client.on('click', function(data) {
     // Wand click button
     console.log('click');
     console.log(data);
