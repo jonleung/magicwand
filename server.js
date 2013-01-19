@@ -23,12 +23,29 @@ app.get('/app-interface.js', function (req, res) {
 
 io.sockets.on('connection', function (socket) {
   socket.on('register', function (data) {
+    // Client computer registration
+    console.log('register');
     console.log(data);
   });
   socket.on('degrees', function (data) {
+    console.log('Current rotation = ' + data.rotation);
+  });
+  socket.on('calibrate', function(data) {
+    // Wand calibration
+    console.log('calibrate');
     console.log(data);
   });
-
+  socket.on('hold', function(data) {
+    // Wand hold button
+    console.log('hold');
+    console.log(data);
+  });
+  socket.on('click', function(data) {
+    // Wand click button
+    console.log('click');
+    console.log(data);
+  });
+  
 });
               
 

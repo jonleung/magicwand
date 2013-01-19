@@ -46,6 +46,7 @@ var global = (function () { return this; }());
 
       polar = toPolarCoordinates(actual)
       w('b', "polar:" + polar);
+      post_degrees(polar);
 
       w('beta', ev.beta);
       w('gamma', ev.gamma);
