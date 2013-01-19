@@ -1,4 +1,4 @@
-var socket = io.connect('http://158.130.111.32:8080/');
+var socket = io.connect('http://158.130.109.229:8080/');
 
 can_post = true;
 var post_degrees = function(degrees) {
