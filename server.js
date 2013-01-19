@@ -3,12 +3,17 @@ var app = express()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server);
 
+app.use("/static", express.static(__dirname + '/static'));
+
 var PORT = 8080;
 server.listen(PORT);
 console.log("Listening on port " + PORT);
 
-
 app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/computer.html');
+});
+
+app.get('/phone', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
@@ -30,6 +35,8 @@ var normalize_angle = function (degrees) {
   }
 };
 
+var start_angle, end_angle;
+
 io.sockets.on('connection', function (socket) {
   socket.on('register', function (data) {
     // Client computer registration
@@ -43,6 +50,8 @@ io.sockets.on('connection', function (socket) {
     // Wand calibration
     console.log('calibrate');
     console.log(data);
+    start_angle = data.start_angle;
+    end_angle = data.end_angle;
   });
   socket.on('hold', function(data) {
     // Wand hold button

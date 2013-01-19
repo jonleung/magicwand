@@ -10,3 +10,7 @@ var post_degrees = function(degrees) {
     }, 100);
   }
 };
+
+var post_calibrate = function (start_angle, end_angle) {
+  socket.emit('calibrate', { start_angle: start_angle, end_angle: end_angle });
+};

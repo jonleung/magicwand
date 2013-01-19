@@ -46,7 +46,6 @@ var global = (function () { return this; }());
 
       polar = toPolarCoordinates(actual)
       w('b', "polar:" + polar);
-      post_degrees(polar);
 
       w('beta', ev.beta);
       w('gamma', ev.gamma);
@@ -67,7 +66,7 @@ var global = (function () { return this; }());
 
 }());
 
-
+var start_angle, end_angle;
 
 $(document).ready(function() {
 
@@ -86,6 +85,13 @@ $(document).ready(function() {
 
   })
 
+  $("#calibrate").hammer().bind("hold", function(e){
+    start_angle = polar;
+  });
 
+  $("#calibrate").hammer().bind("release", function(e){
+    end_angle = polar;
+    post_calibrate(start_angle, end_angle);
+  });
 
 });
