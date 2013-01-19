@@ -1,4 +1,4 @@
-var polar;
+var polar, init_angle;
 
 var global = (function () { return this; }());
 (function () {
@@ -45,8 +45,15 @@ var global = (function () { return this; }());
       w('a', "actual:" + actual);
 
       polar = toPolarCoordinates(actual)
+      if (typeof init_angle === 'undefined') {
+        init_angle = polar;
+      }
+      else {
+        polar -= init_angle;
+      }
       w('b', "polar:" + polar);
 
+      
       w('beta', ev.beta);
       w('gamma', ev.gamma);
     }
