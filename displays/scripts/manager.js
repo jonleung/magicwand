@@ -117,7 +117,7 @@ EffectsManager.prototype.logo = function() {
 
 EffectsManager.prototype.soundcloud = function() {
 	$(this.container).css("opacity", 1);
-	var trollhtml = "<center><img src='crash.jpg' style='margin-left: 200px; height: 400px; zoom:2; -moz-transform: scale(2);'></center>";
+	var trollhtml = "<center><img src='crash.jpg' style='height: 400px; zoom:2; -moz-transform: scale(2);'></center>";
 	$('#animationarea').html(trollhtml);
 }
 
