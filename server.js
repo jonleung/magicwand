@@ -5,8 +5,8 @@ var app = express()
 
 
 //io.disable('heartbeats');
-io.set('heartbeat timeout', 3000);
-io.set('heartbeat interval', 1500);
+//io.set('heartbeat timeout', 3000);
+//io.set('heartbeat interval', 1500);
 
 
 app.use("/static", express.static(__dirname + '/static'));
@@ -68,7 +68,12 @@ io.sockets.on('connection', function (client) {
   client.on('section', function (data) {
     console.log(data);
     group = data.section;
-    io.sockets.in(group).volatile.emit('event', data);
+    if(data.demo == 'nyancat'){
+      io.sockets.in('all').volatile.emit('event', data);
+    }
+    else{
+      io.sockets.in(group).volatile.emit('event', data);
+    }
   });
   
   client.on('calibrate', function(data) {
