@@ -24,15 +24,16 @@
     <script src="/static/js/interface.js"></script>
 
     <style>
-        body { min-height:540px; }     
+        body { 
+            min-height:420px;
+            -webkit-user-select: none;
+        }     
         body[orient="portrait"] { min-height:540px; }
         body[orient="landscape"] { min-height:400px; }
 
         .button {
-            padding: 50px;
-            background: green;
             text-align:center;
-            height: 100px;
+            height: 150px;
         }
         #initialize{
         }
@@ -45,11 +46,14 @@
         }
 
         .hidden {
+            visibility: hidden;
+        }
+        .none {
             display: none;
         }
 
         .switcher {
-            position: absolute;
+            position: relative;
             bottom: 0px;
             width: 30%;
             height: 60px;
@@ -60,12 +64,14 @@
         #prev {
             left: 0px;
             background: gray;
+            float:left;
 
         }
 
         #next {
             right:0px;
             background: green;
+            float: right;
 
         }
 
@@ -81,8 +87,31 @@
         }
 
         .btn .btn-large .btn-block {
-            height: 200px;
+            height: 150px;
         }
+
+        .section_container {
+            width: 100%;
+            height: 60px;
+            display: inline-block;
+            margin:0px;
+            text-align: center;
+            margin-top:80px;
+            margin-bottom: 50px;
+        }
+        .section {
+            width: 24%;
+            display: inline-block;
+            margin:0px;
+            height: 100%;
+        }
+
+        #section1{background: red;}
+        #section2{background: yellow;}
+        #section3{background: green;}
+        #section4{background: blue;}
+
+
         
     </style>
   </head> 
@@ -95,26 +124,33 @@
     <span id="c">&nbsp;</span><br/>
  -->
     <div class="screen" id="1">
-        <button class="btn btn-large btn-block" id="calibrate" type="button" demo="calibrate">Calibrate</button>
+        <button class="btn btn-large btn-block button" id="calibrate" type="button" demo="calibrate">Calibrate</button>
     </div>
 
-    <div class="screen hidden" id="2">
-        <button class="btn btn-large btn-block activate" type="button" demo="lumos">Lumos</button>
+    <div class="screen none" id="2">
+        <button class="btn btn-large btn-block button activate" type="button" demo="lumos">Lumos</button>
     </div>
 
-    <div class="screen hidden" id="3">
-        <button class="btn btn-large btn-block activate" id="initialize" type="button" demo"warm_up">Warm Up</button>
+    <div class="screen none" id="3">
+        <button class="btn btn-large btn-block button activate" id="initialize" type="button" demo"warm_up">Warm Up</button>
     </div>
 
-    <div class="screen hidden" id="4">
-        <button class="btn btn-large btn-block activate" id="initialize" type="button" demo="synthesizer">Synthesizer</button>
+    <div class="screen none" id="4">
+        <button class="btn btn-large btn-block button activate" id="initialize" type="button" demo="synthesizer">Synthesizer</button>
     </div>
 
-    <div class="screen hidden" id="5">
-        <button class="btn btn-large btn-block activate" id="initialize" type="button" demo="nyancat">Crucio</button>
+    <div class="screen none" id="5">
+        <button class="btn btn-large btn-block button activate" id="initialize" type="button" demo="nyancat">Crucio</button>
     </div>
 
-    <div id="values">&nbsp;</div>
+    <div class="section_container">
+        <div class="section hidden" id="section1">&nbsp;</div>
+        <div class="section hidden" id="section2">&nbsp;</div>
+        <div class="section hidden" id="section3">&nbsp;</div>
+        <div class="section hidden" id="section4">&nbsp;</div>
+    </div>
+
+    <div class="none" id="values">&nbsp;</div>
 
     <div class="switcher" id="prev">Prev</div>
     <div class="switcher" id="next">Next</div>

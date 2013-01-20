@@ -1,14 +1,16 @@
 $(document).ready(function() {
 
-  window.scrollTo(0,1)   
+  window.scrollTo(0,1)
+
+  $(".switcher").css({bottom: 0})
 
   var drag_counter = 0
   var cur_screen_id = 1
   var TOTAL_SCREENS = $(".screen").length
 
   var showScreen = function(cur_screen_id) {
-    $(".screen").addClass("hidden")
-    $("#"+cur_screen_id).removeClass("hidden")
+    $(".screen").addClass("none")
+    $("#"+cur_screen_id).removeClass("none")
     log("showing screen " + cur_screen_id + " of " + TOTAL_SCREENS)
   }
 
@@ -43,11 +45,8 @@ $(document).ready(function() {
         showScreen(cur_screen_id)
         
       }
-
-
       
     }
-
   })
 
 

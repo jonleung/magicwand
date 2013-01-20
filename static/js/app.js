@@ -1,8 +1,16 @@
 var angle, init_angle, magnitude, sendSection = false, demo;
-
 var global = (function () { return this; }());
+
+
+
+
 (function () {
   "use strict";
+
+  function displaySection(section_id) {
+    $(".section").addClass("hidden")
+    $("#section"+section_id).removeClass("hidden")
+  }
 
   function run() {
     var w = function (id, text) {
@@ -68,8 +76,17 @@ var global = (function () { return this; }());
 
       w('gamma', ev.gamma);
 
+      var section = getSection(angle)
+      displaySection(section)
+      log(section)
+
+
+
+
+
+
       if(sendSection) {
-        post_section(getSection(angle), magnitude, demo);
+        post_section(section, magnitude, demo);
       }
 
     }
