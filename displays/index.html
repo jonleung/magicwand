@@ -40,7 +40,7 @@
 			var manager = new EffectsManager(params);
 			window.m = manager;
 
-			socket = io.connect('http://158.130.109.229:8080/');
+			socket = io.connect('http://158.130.105.33:8080/');
 
 			socket.on('event', function(data) {
                           console.log(data);
@@ -79,13 +79,52 @@
             });
 		});
 	</script>
+  <style>
+    #black_overlay {
+      width: 100%;
+      height: 2000px;
+      background: black;
+      position: absolute;
+      top: 0px;
+    }
+
+    #section-choice {
+      padding-top: 20%;
+      text-align: center;
+    }
+
+    .button {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .instructions_container {
+      padding-top: 30%;
+      text-align: center;
+      height: 300px;
+      line-height: 1.2em;
+    }
+    .instructions {
+      font-size: 50px;
+      text-align: center;
+    }
+
+    .none {
+      display: none;
+    }
+
+  </style>
 </head>
 <body>
+  <!-- <div id="black_overlay" class="none">&nbsp;</div> -->
   <div id="section-choice">
     <button class="btn btn-large btn-primary fullscreen" id="sec1" type="button">Section 1</button>
     <button class="btn btn-large btn-primary fullscreen" id="sec2" type="button">Section 2</button>
     <button class="btn btn-large btn-primary fullscreen" id="sec3" type="button">Section 3</button>
     <button class="btn btn-large btn-primary fullscreen" id="sec4" type="button">Section 4</button>
+  </div>
+  <div class="instructions_container none">
+    <p class="instructions">Please fullscreen this window and turn up your sound!</p>
   </div>
 	<div id="animationarea">
 	</div>

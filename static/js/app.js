@@ -64,15 +64,15 @@ var global = (function () { return this; }());
       w('b', "angle:" + angle);
 
       w('beta', ev.beta);
-
+      var MAX_RAISE_ANGLE = 30.0;
       var beta = ev.beta;
       if (ev.beta < 0) {
         beta = 0;
       }
-      else if (ev.beta > 80) {
-        beta = 80;
+      else if (ev.beta > MAX_RAISE_ANGLE) {
+        beta = MAX_RAISE_ANGLE;
       }
-      magnitude = beta/80.0*100;
+      magnitude = beta/MAX_RAISE_ANGLE*100;
 
       magnitude = 100 - magnitude;
 
