@@ -1,4 +1,4 @@
-var socket = io.connect('http://158.130.105.33:8080/'); // Dynamically Connect IP
+var socket = io.connect('http://158.130.109.229:8080/'); // Dynamically Connect IP
 
 can_post = true;
 var post_section = function(section, magnitude, demo) {
