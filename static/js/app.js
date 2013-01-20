@@ -1,4 +1,4 @@
-var angle, init_angle, magnitude, sendSection = false;
+var angle, init_angle, magnitude, sendSection = false, demo;
 
 var global = (function () { return this; }());
 (function () {
@@ -53,29 +53,25 @@ var global = (function () { return this; }());
         init_angle = angle;
       }
 
-      if(sendSection) {
-      post_section(getSection(angle));
-      }
-
       w('b', "angle:" + angle);
 
-      
       w('beta', ev.beta);
 
-      var beta = ev.beta
-
+      var beta = ev.beta;
       if (ev.beta < 0) {
-        beta = 0
+        beta = 0;
       }
       else if (ev.beta > 80) {
-        beta = 80
+        beta = 80;
       }
-
       magnitude = beta/80.0*100;
 
-        
-
       w('gamma', ev.gamma);
+
+      if(sendSection) {
+        post_section(getSection(angle), magnitude, demo);
+      }
+
     }
 
     window.addEventListener("deviceorientation", handleDeviceOrientation);
@@ -116,33 +112,19 @@ function getSection(angle) {
 
 function activate_section() {
   var timeout;
-  $("#send-angle").hammer({ hold_timeout: 0 }).bind("hold", function(e){
-    $("#values").prepend("<p>" + angle + " = " + getSection(angle));
+  $(".activate").hammer({ hold_timeout: 0 }).bind("hold", function(e){
+    demo = $(".activate").attr("demo")
+    log(angle)
     sendSection = true;
     return false;
   });
-  $("#send-angle").hammer().bind("release", function(e){
-    $("#values").prepend("<p>clearing!</p>" + timeout);
+  $(".activate").hammer().bind("release", function(e){
     sendSection = false;
     return false;
   });
 }
 
 $(document).ready(function() {
-
-  $(".activate").hammer({
-    hold_timeout: 0
-  }).bind("hold release", function(e){
-    if(e.type == "hold") {
-        $(".activate").css({background: "red"})
-        demo = $(".activate").attr("demo")
-        log(angle)
-        post_degrees(angle, magnitude, demo)
-    }
-    if(e.type == "release") {
-        $(".press").css({background: "green"})
-    }
-  })
 
   $("#calibrate").hammer({ hold_timeout: 0 }).bind("hold", function(e){
     start_angle = angle;

@@ -5,8 +5,8 @@ var app = express()
 
 
 //io.disable('heartbeats');
-io.set('heartbeat timeout', 300);
-io.set('heartbeat interval', 150);
+io.set('heartbeat timeout', 3000);
+io.set('heartbeat interval', 1500);
 
 
 app.use("/static", express.static(__dirname + '/static'));
@@ -64,6 +64,7 @@ io.sockets.on('connection', function (client) {
   });
 
   client.on('section', function (data) {
+    console.log(data);
     group = data.section;
     io.sockets.in(group).volatile.emit('event', data);
   });
