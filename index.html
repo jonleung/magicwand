@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html manifest="main.manifest">
+<html>
   <head> 
     <title>Accelerometer</title> 
 
@@ -20,31 +20,111 @@
     <script src="/static/js/app-interface.js"></script>
     <script src="/static/js/app.js"></script>
 
+    <script src="/static/js/helpers.js"></script>
+    <script src="/static/js/interface.js"></script>
+
     <style>
+        body { min-height:540px; }     
+        body[orient="portrait"] { min-height:540px; }
+        body[orient="landscape"] { min-height:400px; }
+
         .button {
             padding: 50px;
             background: green;
             text-align:center;
+            height: 100px;
         }
         #initialize{
         }
+    </style>
+
+
+    <style>
+        .screen {
+            height: 100px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .switcher {
+            position: absolute;
+            bottom: 0px;
+            width: 30%;
+            height: 60px;
+            text-align: center;
+            padding-top:40px;
+        }
+
+        #prev {
+            left: 0px;
+            background: gray;
+
+        }
+
+        #next {
+            right:0px;
+            background: green;
+
+        }
+
+        .btn-large {
+            width: 100%;
+        }
+
+        #position {
+            position: absolute;
+            bottom: 30px;
+            margin-left: 43%;
+            font-size: 200%;
+        }
+        
     </style>
   </head> 
  
   <body> 
 
-    <h2>Device Orientation Event</h2>
-
-    <button class="btn btn-large btn-block" id="initialize" type="button">Initialize</button>
-    <button class="btn btn-large btn-block" id="calibrate" type="button">Calibrate</button>
-    <div id="values">&nbsp;</div>
-
     alpha (z-axis) (0, 360):<br/>
     <span id="a">&nbsp;</span><br/>
     <span id="b">&nbsp;</span><br/>
     <span id="c">&nbsp;</span><br/>
-    <span id="d">&nbsp;</span><br/>
-    <span id="e">&nbsp;</span><br/>
+
+    <div class="screen" id="1">
+        <button class="btn btn-large btn-block" id="calibrate" type="button">Calibrate</button>
+    </div>
+
+    <div class="screen hidden" id="2">
+        <button class="btn btn-large btn-block activate" type="button">Lumos</button>
+    </div>
+
+    <div class="screen hidden" id="3">
+        <button class="btn btn-large btn-block" id="initialize" type="button">Warm Up</button>
+    </div>
+
+    <div class="screen hidden" id="3">
+        <button class="btn btn-large btn-block" id="initialize" type="button">Synthesizer</button>
+    </div>
+
+    <div class="screen hidden" id="3">
+        <button class="btn btn-large btn-block" id="initialize" type="button">Crucio</button>
+    </div>
+
+    <div id="values">&nbsp;</div>
+
+    <div class="switcher" id="prev">Prev</div>
+    <div class="switcher" id="next">Next</div>
+
+    <div id="position">1 of 3</div>
+
+
+
+
+
+
+
+
+
 
     beta (x-axis) (-180, 180):<br/>
     <span id="beta">&nbsp;</span>

@@ -1,4 +1,4 @@
-var angle, init_angle;
+var angle, init_angle, magnitude;
 
 var global = (function () { return this; }());
 (function () {
@@ -6,7 +6,11 @@ var global = (function () { return this; }());
 
   function run() {
     var w = function (id, text) {
-          global.document.getElementById(id).innerHTML = String(text);
+          var el = global.document.getElementById(id)
+          if (el != null) {
+            el.innerHTML = String(text);  
+          }
+          
         };
 
     function handleFirstDeviceMotion(ev) {
@@ -29,7 +33,7 @@ var global = (function () { return this; }());
       w('r-gamma', ev.rotationRate.gamma);
     }
 
-    function normalizeAngle(theta) {
+    function normalizeAngle(theta) { //ADDED
       if (theta > 180) {
         theta = (theta - 360) * -1;
       }
@@ -53,6 +57,20 @@ var global = (function () { return this; }());
 
       
       w('beta', ev.beta);
+
+      var beta = ev.beta
+
+      if (ev.beta < 0) {
+        beta = 0
+      }
+      else if (ev.beta > 80) {
+        beta = 80
+      }
+
+      magnitude = beta/80.0*100;
+
+        
+
       w('gamma', ev.gamma);
     }
 
@@ -75,26 +93,24 @@ var start_angle, end_angle;
 
 $(document).ready(function() {
 
-
-  $("#initialize").hammer({
+  $(".activate").hammer({
     hold_timeout: 0
   }).bind("hold release", function(e){
     if(e.type == "hold") {
-        $("#initialize").css({background: "red"})
-        $("#values").prepend("<p>"+angle+"<p>")
+        $(".activate").css({background: "red"})
+        log(angle)
         post_degrees(angle)
     }
     if(e.type == "release") {
-        $("#initialize").css({background: "green"})
+        $(".press").css({background: "green"})
     }
-
   })
 
-  $("#calibrate").hammer().bind("hold", function(e){
+  $("#calibrate").hammer().bind("hold", function(e){ //ADDED
     start_angle = angle;
   });
 
-  $("#calibrate").hammer().bind("release", function(e){
+  $("#calibrate").hammer().bind("release", function(e){ //ADDED
     end_angle = angle;
     post_calibrate(start_angle, end_angle);
   });

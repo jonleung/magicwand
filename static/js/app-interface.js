@@ -1,9 +1,12 @@
-var socket = io.connect('http://158.130.109.229:8080/');
+var socket = io.connect('http://158.130.105.33:8080/'); // Dynamically Connect IP
 
 can_post = true;
-var post_degrees = function(degrees) {
+var post_degrees = function(degrees, magnitude) {
   if(can_post){
-    socket.emit('degrees', { rotation: degrees });
+    socket.emit('degrees', { 
+                              rotation: degrees,
+                              magnitude: magnitude
+                           });
     can_post = false;
     setTimeout(function(){
       can_post = true;
