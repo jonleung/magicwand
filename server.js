@@ -17,9 +17,9 @@ var PORT = 8080;
 server.listen(PORT);
 console.log("Listening on port " + PORT);
 
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/displays/index.html');
-});
+// app.get('/', function (req, res) {
+//   res.sendfile(__dirname + '/displays/index.html');
+// });
 
 app.get('/phone', function (req, res) {
   res.sendfile(__dirname + '/index.html');
@@ -68,7 +68,7 @@ io.sockets.on('connection', function (client) {
   client.on('section', function (data) {
     console.log(data);
     group = data.section;
-    if(data.demo == 'nyancat'){
+    if(data.demo === 'nyancat', data.demo === 'nyancat'){
       io.sockets.in('all').volatile.emit('event', data);
     }
     else{
