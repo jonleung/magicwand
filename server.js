@@ -68,7 +68,12 @@ io.sockets.on('connection', function (client) {
   client.on('section', function (data) {
     console.log(data);
     group = data.section;
-    io.sockets.in(group).volatile.emit('event', data);
+    if(data.demo == 'nyancat'){
+      io.sockets.in('all').volatile.emit('event', data);
+    }
+    else{
+      io.sockets.in(group).volatile.emit('event', data);
+    }
   });
   
   client.on('calibrate', function(data) {

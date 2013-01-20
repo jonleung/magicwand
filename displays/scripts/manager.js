@@ -87,6 +87,7 @@ EffectsManager.prototype.lumos = function(magnitude) { // from 0 - 1
 }
 
 EffectsManager.prototype.nyancat = function() {
+        this.setbg("white");
 	$("<link/>", {
 		rel: "stylesheet",
 		type: "text/css",
