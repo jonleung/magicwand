@@ -14,8 +14,24 @@
             socket.emit('register', { section: section });
             return false;
           }
-          
+          var _this = this;
+
+          // Find the right method, call on correct element
+			function launchFullScreen(element) {
+			  if(element.requestFullScreen) {
+			    element.requestFullScreen();
+			  } else if(element.mozRequestFullScreen) {
+			    element.mozRequestFullScreen();
+			  } else if(element.webkitRequestFullScreen) {
+			    element.webkitRequestFullScreen();
+			  }
+			}
+
+
 		$(document).ready(function(){
+			$('.fullscreen').click(function(){launchFullScreen(document.documentElement);});
+			// Launch fullscreen for browsers that support it!
+			
 			var _this = this;
 			var params = {
 				el: "#animationarea",
@@ -66,10 +82,10 @@
 </head>
 <body>
   <div id="section-choice">
-    <button class="btn btn-large btn-primary" id="sec1" type="button">Section 1</button>
-    <button class="btn btn-large btn-primary" id="sec2" type="button">Section 2</button>
-    <button class="btn btn-large btn-primary" id="sec3" type="button">Section 3</button>
-    <button class="btn btn-large btn-primary" id="sec4" type="button">Section 4</button>
+    <button class="btn btn-large btn-primary fullscreen" id="sec1" type="button">Section 1</button>
+    <button class="btn btn-large btn-primary fullscreen" id="sec2" type="button">Section 2</button>
+    <button class="btn btn-large btn-primary fullscreen" id="sec3" type="button">Section 3</button>
+    <button class="btn btn-large btn-primary fullscreen" id="sec4" type="button">Section 4</button>
   </div>
 	<div id="animationarea">
 	</div>
