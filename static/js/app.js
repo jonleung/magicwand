@@ -64,7 +64,7 @@ var global = (function () { return this; }());
       w('b', "angle:" + angle);
 
       w('beta', ev.beta);
-      var MAX_RAISE_ANGLE = 65.0;
+      var MAX_RAISE_ANGLE = 30.0;
       var beta = ev.beta;
       if (ev.beta < 0) {
         beta = 0;

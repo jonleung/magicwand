@@ -68,7 +68,7 @@ io.sockets.on('connection', function (client) {
   client.on('section', function (data) {
     console.log(data);
     group = data.section;
-    if(data.demo === 'nyancat', data.demo === 'nyancat'){
+    if(data.demo == 'nyancat' || data.demo == 'epic_final' || data.demo == 'boom'){
       io.sockets.in('all').volatile.emit('event', data);
     }
     else{

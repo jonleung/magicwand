@@ -82,6 +82,7 @@ EffectsManager.prototype.setbg = function(color) {
 }
 
 EffectsManager.prototype.lumos = function(magnitude) { // from 0 - 1
+	$(".instructions_container").remove()
 	this.setbg("orange");
 	soundManager.play('/displays/sounds/lumos.mp3');
 	$(this.container).fadeTo(100, magnitude);
