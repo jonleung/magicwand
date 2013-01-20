@@ -18,7 +18,7 @@ server.listen(PORT);
 console.log("Listening on port " + PORT);
 
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/computer.html');
+  res.sendfile(__dirname + '/displays/index.html');
 });
 
 app.get('/phone', function (req, res) {

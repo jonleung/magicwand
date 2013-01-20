@@ -74,16 +74,13 @@ var global = (function () { return this; }());
       }
       magnitude = beta/MAX_RAISE_ANGLE*100;
 
+      magnitude = 100 - magnitude;
+
       w('gamma', ev.gamma);
 
       var section = getSection(angle)
       displaySection(section)
       log(section)
-
-
-
-
-
 
       if(sendSection) {
         post_section(section, magnitude, demo);
@@ -127,20 +124,40 @@ function getSection(angle) {
   }
 }
 
-function activate_section() {
-  var timeout;
-  $(".activate").hammer({ hold_timeout: 0 }).bind("hold", function(e){
-    demo = $(this).attr("demo")
-    log(angle)
+function activateEvents() {
+  // Activate hold events
+  // These fire repeatedly while button is held
+  $(".hold").hammer({ hold_timeout: 0 }).bind("hold", function(e){
+    demo = $(this).attr("demo");
+    log(angle);
     sendSection = true;
-    $("this").addClass("dark")
+    $("this").addClass("dark");
     return false;
   });
-  $(".activate").hammer().bind("release", function(e){
+  $(".hold").hammer().bind("release", function(e){
     sendSection = false;
-    $("this").removeClass("dark")
+    $("this").removeClass("dark");
     return false;
   });
+
+
+  // Activate press events
+  // These only fire once when pressed
+  $(".press").hammer({ hold_timeout: 0 }).bind("hold", function(e){
+    demo = $(this).attr("demo");
+    log(angle);
+    var section = getSection(angle);
+    getSection(section);
+    log(section);
+    post_section(section, magnitude, demo);
+    $("this").addClass("dark");
+    return false;
+  });
+  $(".press").hammer().bind("release", function(e){
+    $("this").removeClass("dark");
+    return false;
+  });
+  
 }
 
 $(document).ready(function() {
@@ -152,7 +169,7 @@ $(document).ready(function() {
   $("#calibrate").hammer().bind("release", function(e){ //ADDED
     end_angle = angle;
     post_calibrate(start_angle, end_angle);
-    activate_section();
+    activateEvents();
   });
 
 });
