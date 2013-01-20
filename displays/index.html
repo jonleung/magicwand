@@ -7,7 +7,20 @@
 	<script src="scripts/soundmanager2-nodebug-jsmin.js"></script>
 	<script src="scripts/manager.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	
+	<script src="//connect.soundcloud.com/sdk.js"></script>
+	<script>
+		function setUpSoundCloud(){
+		  	SC.initialize({
+				client_id: "959e351866bf146679543c8df60590e3",
+				redirect_uri: "158.130.23.1/callback.html"
+			});
+			SC.connect(function(){
+				SC.get('/tracks/angels-clip', function(track){
+					track.play();
+				});
+			});
+		}
+	</script>
 	<script>
           var socket;
           function register(section) {
