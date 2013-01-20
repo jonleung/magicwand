@@ -130,7 +130,7 @@ function getSection(angle) {
 function activate_section() {
   var timeout;
   $(".activate").hammer({ hold_timeout: 0 }).bind("hold", function(e){
-    demo = $(".activate").attr("demo")
+    demo = $(this).attr("demo")
     log(angle)
     sendSection = true;
     $("this").addClass("dark")
