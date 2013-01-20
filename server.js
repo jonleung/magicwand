@@ -56,6 +56,7 @@ var normalize_angle = function (degrees) {
 };
 
 var start_angle, end_angle;
+var register_count = 0;
 
 io.sockets.on('connection', function (client) {
   // Add them to all group
@@ -66,6 +67,8 @@ io.sockets.on('connection', function (client) {
     // data = { section: 2 }
     console.log('register');
     console.log(data);
+    register_count += 1;
+    console.log("registered count = " + register_count);
     client.join(data.section);
   });
   
