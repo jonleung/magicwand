@@ -31,34 +31,36 @@
 			  if (data.demo === "lumos"){
                             m.lumos(data.magnitude / 100);
 			  } else if (data.demo === "nyancat") {
-                            m.nyancat();
-			  } else if (data.demo === "choral") {
-
-			  } else {
-
+                m.nyancat();
+			  } else if (data.demo === "individual") {
+			  	m.individual();
+			  } else if (data.demo === "epic_final") {
+			  	m.soundtogether();
+			  } else if (data.demo === "boom") {
+			  	m.boom();
 			  }
 			});
 
-                        $('#sec1').click(function(e) {
-                          register(1);
-                          manager.setSection(1);
-                          $('#section-choice').remove()
-                        });
-                        $('#sec2').click(function(e) {
-                          register(2);
-                          manager.setSection(2);
-                          $('#section-choice').remove()
-                        });
-                        $('#sec3').click(function(e) {
-                          register(3);
-                          manager.setSection(3);
-                          $('#section-choice').remove()
-                        });
-                        $('#sec4').click(function(e) {
-                          register(4);
-                          manager.setSection(4);
-                          $('#section-choice').remove()
-                        });
+            $('#sec1').click(function(e) {
+              register(1);
+              manager.setSection(1);
+              $('#section-choice').remove()
+            });
+            $('#sec2').click(function(e) {
+              register(2);
+              manager.setSection(2);
+              $('#section-choice').remove()
+            });
+            $('#sec3').click(function(e) {
+              register(3);
+              manager.setSection(3);
+              $('#section-choice').remove()
+            });
+            $('#sec4').click(function(e) {
+              register(4);
+              manager.setSection(4);
+              $('#section-choice').remove()
+            });
 		});
 	</script>
   <style>
