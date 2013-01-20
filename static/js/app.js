@@ -133,10 +133,12 @@ function activate_section() {
     demo = $(".activate").attr("demo")
     log(angle)
     sendSection = true;
+    $("this").addClass("dark")
     return false;
   });
   $(".activate").hammer().bind("release", function(e){
     sendSection = false;
+    $("this").removeClass("dark")
     return false;
   });
 }
