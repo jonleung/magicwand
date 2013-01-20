@@ -79,35 +79,39 @@
             margin-left: 43%;
             font-size: 200%;
         }
+
+        .btn .btn-large .btn-block {
+            height: 200px;
+        }
         
     </style>
   </head> 
  
   <body> 
 
-    alpha (z-axis) (0, 360):<br/>
+<!--     alpha (z-axis) (0, 360):<br/>
     <span id="a">&nbsp;</span><br/>
     <span id="b">&nbsp;</span><br/>
     <span id="c">&nbsp;</span><br/>
-
+ -->
     <div class="screen" id="1">
-        <button class="btn btn-large btn-block" id="calibrate" type="button">Calibrate</button>
+        <button class="btn btn-large btn-block" id="calibrate" type="button" demo="calibrate">Calibrate</button>
     </div>
 
     <div class="screen hidden" id="2">
-        <button class="btn btn-large btn-block activate" type="button">Lumos</button>
+        <button class="btn btn-large btn-block activate" type="button" demo="lumos">Lumos</button>
     </div>
 
     <div class="screen hidden" id="3">
-        <button class="btn btn-large btn-block" id="initialize" type="button">Warm Up</button>
+        <button class="btn btn-large btn-block activate" id="initialize" type="button" demo"warm_up">Warm Up</button>
     </div>
 
-    <div class="screen hidden" id="3">
-        <button class="btn btn-large btn-block" id="initialize" type="button">Synthesizer</button>
+    <div class="screen hidden" id="4">
+        <button class="btn btn-large btn-block activate" id="initialize" type="button" demo="synthesizer">Synthesizer</button>
     </div>
 
-    <div class="screen hidden" id="3">
-        <button class="btn btn-large btn-block" id="initialize" type="button">Crucio</button>
+    <div class="screen hidden" id="5">
+        <button class="btn btn-large btn-block activate" id="initialize" type="button" demo="nyancat">Crucio</button>
     </div>
 
     <div id="values">&nbsp;</div>
@@ -119,7 +123,7 @@
 
 
 
-
+<!-- 
 
 
 
@@ -167,7 +171,7 @@
 
     <br/>
     interval: <span id="interval">&nbsp;</span>
-    <br/>
+    <br/> -->
 
   </body> 
 </html> 
