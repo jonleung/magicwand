@@ -96,7 +96,7 @@ EffectsManager.prototype.nyancat = function() {
 		type: "text/css",
 		href: "/displays/nyan.css"
 	}).appendTo("head");
-	var nyanhtml = '<div id="mainContainer"> <div id="nyanCat"> <div id="wholeHead"> <div class="skin ear"></div> <div class="skin ear rightEar"></div> <div id="mainHead" class="skin"> <div class="eye"></div> <div class="eye rightEye"></div> <div class="nose"></div> <div class="chick"></div> <div class="chick rightChick"></div> <div class="mouth">E</div> </div> </div> <div id="toastBody"> <div> &nbsp; &nbsp; &nbsp;.&nbsp;&nbsp;.&nbsp; &nbsp; &nbsp;..&nbsp; &nbsp; &nbsp;.&nbsp;.&nbsp; &nbsp; &nbsp;&nbsp&nbsp&nbsp;..&nbsp; &nbsp; &nbsp;.&nbsp;&nbsp;. </div> </div> <div id="wholeTail"> <div class="tail skin"></div> <div class="tail middleTail skin"></div> <div class="tail backTail skin"></div> </div> <div id="allYourLegAreBelongToUs"> <div class="skin leg back leftBack"></div> <div class="skin leg back"></div> <div class="skin leg front leftFront"></div> <div class="skin leg front"></div> </div> <div class="rainbow"></div> <div class="rainbow r2"></div> <div class="rainbow r3"></div> <div class="rainbow r4"></div> </div> <div class="star starMovement1"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> <div class="star starMovement2 backwards"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> <div class="star starMovement3"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> <div class="star starMovement4"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> <div class="star starMovement5"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> </div>';  
+	var nyanhtml = '<div id="mainContainer"><div id="nyanCat"> <div id="wholeHead"> <div class="skin ear"></div> <div class="skin ear rightEar"></div> <div id="mainHead" class="skin"> <div class="eye"></div> <div class="eye rightEye"></div> <div class="nose"></div> <div class="chick"></div> <div class="chick rightChick"></div> <div class="mouth">E</div> </div> </div> <div id="toastBody"> <div> &nbsp; &nbsp; &nbsp;.&nbsp;&nbsp;.&nbsp; &nbsp; &nbsp;..&nbsp; &nbsp; &nbsp;.&nbsp;.&nbsp; &nbsp; &nbsp;&nbsp&nbsp&nbsp;..&nbsp; &nbsp; &nbsp;.&nbsp;&nbsp;. </div> </div> <div id="wholeTail"> <div class="tail skin"></div> <div class="tail middleTail skin"></div> <div class="tail backTail skin"></div> </div> <div id="allYourLegAreBelongToUs"> <div class="skin leg back leftBack"></div> <div class="skin leg back"></div> <div class="skin leg front leftFront"></div> <div class="skin leg front"></div> </div> <div class="rainbow"></div> <div class="rainbow r2"></div> <div class="rainbow r3"></div> <div class="rainbow r4"></div> </div> <div class="star starMovement1"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> <div class="star starMovement2 backwards"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> <div class="star starMovement3"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> <div class="star starMovement4"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> <div class="star starMovement5"> <div number="1"></div> <div number="2"></div> <div number="3"></div> <div number="4"></div> <div number="5"></div> <div number="6"></div> <div number="7"></div> <div number="8"></div> </div> </div>';  
 	$('body').html(nyanhtml);
 	$('body').append('<audio loop="loop" src="/displays/sounds/nyancat.ogg" autoplay="true">');
 }
@@ -117,7 +117,7 @@ EffectsManager.prototype.logo = function() {
 
 EffectsManager.prototype.soundcloud = function() {
 	$(this.container).css("opacity", 1);
-	var trollhtml = "<center><img src='soundcloud.png' style='margin-left: 200px; height: 400px'></center>";
+	var trollhtml = "<center><img src='crash.jpg' style='height: 400px; zoom:2; -moz-transform: scale(2);'></center>";
 	$('#animationarea').html(trollhtml);
 }
 
@@ -196,7 +196,7 @@ EffectsManager.prototype.boom = function() {
 	}, 8500);
 	setTimeout(function() {
 		_this.soundcloud();
-	},  300);
+	}, 300);
 }
 
 EffectsManager.prototype.setSection = function(num) {
