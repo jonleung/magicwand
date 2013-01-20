@@ -37,6 +37,14 @@ app.get('/test/:group?', function(req, res) {
   res.end();
 });
 
+app.get('/fire/:demo/:section', function(req, res) {
+  var demo = req.params.group.toString();
+  var section = req.params.group;
+  io.sockets.in(section).volatile.emit('event', { demo: demo,
+                                                section: section,
+                                                magnitude: 100 });
+  res.end();
+});
 
 var normalize_angle = function (degrees) {
   if (degrees > 0){
