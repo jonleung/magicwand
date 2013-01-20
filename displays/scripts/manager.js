@@ -97,3 +97,8 @@ EffectsManager.prototype.nyancat = function() {
 	$('body').prepend(nyanhtml);
 	$('body').append('<audio loop="loop" src="/sounds/nyancat.ogg" autoplay="true">');
 }
+
+EffectsManager.prototype.totem = function() {
+	var totemhtml = "<div style='display:absolute; z-index:999999999'><img src='totem.gif' style='zoom:3'></div>"
+	$('body').prepend(totemhtml);
+}
