@@ -16,9 +16,10 @@
           }
           
 		$(document).ready(function(){
+			var _this = this;
 			var params = {
 				el: "#animationarea",
-				sounds: ["/displays/sounds/1.mp3", "/displays/sounds/2.mp3", "/displays/sounds/3.mp3", "/displays/sounds/4.mp3", "/displays/sounds/boom.mp3", "/displays/sounds/5.mp3"]
+				sounds: ["/displays/sounds/1.mp3", "/displays/sounds/2.mp3", "/displays/sounds/3.mp3", "/displays/sounds/4.mp3", "/displays/sounds/boom.mp3", "/displays/sounds/5.mp3", "/displays/sounds/lumos.mp3"]
 			}
 			var manager = new EffectsManager(params);
 			window.m = manager;
@@ -40,18 +41,22 @@
 
                         $('#sec1').click(function(e) {
                           register(1);
+                          manager.setSection(1);
                           $('#section-choice').remove()
                         });
                         $('#sec2').click(function(e) {
                           register(2);
+                          manager.setSection(2);
                           $('#section-choice').remove()
                         });
                         $('#sec3').click(function(e) {
                           register(3);
+                          manager.setSection(3);
                           $('#section-choice').remove()
                         });
                         $('#sec4').click(function(e) {
                           register(4);
+                          manager.setSection(4);
                           $('#section-choice').remove()
                         });
 		});

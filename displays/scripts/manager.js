@@ -28,6 +28,7 @@ EffectsManager.prototype.flash = function(delay, duration) {
 	var _this = this;
 	var iterations = Math.ceil(duration/delay);
 
+	$(this.container).css("display", "block");
 	for (var i = 0; i < iterations; i++) {
 		(function(i){
 			setTimeout(function(){
@@ -82,6 +83,7 @@ EffectsManager.prototype.setbg = function(color) {
 
 EffectsManager.prototype.lumos = function(magnitude) { // from 0 - 1
 	this.setbg("orange");
+	soundManager.play('/displays/sounds/lumos.mp3');
 	$(this.container).fadeTo(100, magnitude);
 	return this;
 }
@@ -107,14 +109,14 @@ EffectsManager.prototype.totem = function() {
 
 EffectsManager.prototype.logo = function() {
 	$(this.container).css("opacity", 1);
-	var logohtml = "<div style='display:absolute; z-index:999999999; margin: 0 auto; font-size: 170pt; font-family: Arial'>Magic Wand.</div>"
+	var logohtml = "<center><img src='logo.png' style='zoom:1'></center>"
 	$('#animationarea').html(logohtml);
 }
 
 
-EffectsManager.prototype.troll = function() {
+EffectsManager.prototype.soundcloud = function() {
 	$(this.container).css("opacity", 1);
-	var trollhtml = "<img src='troll.png' style='margin-left: 200px; height: 400px'>";
+	var trollhtml = "<center><img src='soundcloud.png' style='margin-left: 200px; height: 400px'></center>";
 	$('#animationarea').html(trollhtml);
 }
 
@@ -150,22 +152,42 @@ EffectsManager.prototype.soundtogether = function() {
 	var _this = this;
 	this.setbg("magenta");
 	this.sPlay('/displays/sounds/5.mp3');
-	setTimeout(function(){_this.fade(1000, 24000);}, 200);
+	setTimeout(function(){_this.fade(800, 24000);}, 200);
 }
 
-EffectsManager.prototype.boom1 = function() {
+EffectsManager.prototype.boom = function() {
 	var _this = this;
+	var soundid = '/displays/sounds/boom.mp3';
 	this.setbg("white");
-	this.sPlay('/displays/sounds/boom.mp3');
+	$(this.container).css("display", "block");
+	this.sPlay(soundid);
+
+	if (this.section === 1 || this.section === 4) {
+		soundManager.mute(soundid);
+		setTimeout(function(){
+			soundManager.unmute(soundid);
+		}, 4000);
+	} 
+	if (this.section === 2 || this.section === 3) {
+		setTimeout(function(){
+			soundManager.mute(soundid);
+		}, 3000);
+		setTimeout(function(){
+			soundManager.unmute(soundid);
+		}, 7000);
+	}
 	setTimeout(function(){
 		_this.logo();
-	}, 300);
+	}, 4400);
 	setTimeout(function(){
 		_this.totem();
-	}, 4400);
-	setTimeout(function() {
-		_this.troll();
 	}, 8500);
+	setTimeout(function() {
+		_this.soundcloud();
+	},  300);
 }
 
-
+EffectsManager.prototype.setSection = function(num) {
+	console.log(num);
+	this.section = num;
+}
