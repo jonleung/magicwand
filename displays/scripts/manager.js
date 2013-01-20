@@ -120,6 +120,17 @@ EffectsManager.prototype.soundcloud = function() {
 	$('#animationarea').html(trollhtml);
 }
 
+EffectsManager.prototype.individual = function() {
+	if (this.section === 1) {
+		this.sound1();
+	} else if (this.section === 2) {
+		this.sound2();
+	} else if (this.section === 3) {
+		this.sound3();
+	} else if (this.section === 4) {
+		this.sound4();
+	}
+}
 EffectsManager.prototype.sound1 = function() {
 	var _this = this;
 	this.setbg("red");
