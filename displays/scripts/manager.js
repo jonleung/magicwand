@@ -102,14 +102,14 @@ EffectsManager.prototype.nyancat = function() {
 
 EffectsManager.prototype.totem = function() {
 	$(this.container).css("opacity", 1);
-	var totemhtml = "<img src='totem.gif' style='zoom:3'>"
+	var totemhtml = "<img src='totem.gif' style='zoom:3; -moz-transform: scale(3);'>"
 	$('#animationarea').html(totemhtml);
 }
 
 
 EffectsManager.prototype.logo = function() {
 	$(this.container).css("opacity", 1);
-	var logohtml = "<center><img src='logo.png' style='zoom:1'></center>"
+	var logohtml = "<center><img src='logo.png' style='zoom:1; -moz-transform: scale(1);'></center>"
 	$('#animationarea').html(logohtml);
 }
 
