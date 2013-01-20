@@ -11,6 +11,8 @@ io.set('heartbeat interval', 1500);
 
 app.use("/static", express.static(__dirname + '/static'));
 
+app.use("/displays", express.static(__dirname + '/displays'));
+
 var PORT = 8080;
 server.listen(PORT);
 console.log("Listening on port " + PORT);
