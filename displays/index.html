@@ -42,7 +42,10 @@
 
 
 		$(document).ready(function(){
-			$('.fullscreen').click(function(){launchFullScreen(document.documentElement);});
+			$('.fullscreen').click(function(){
+				launchFullScreen(document.documentElement);
+				$('body').append("<div id='black_overlay'></div>")
+			});
 			// Launch fullscreen for browsers that support it!
 			
 			var _this = this;
@@ -98,6 +101,7 @@
       height: 2000px;
       background: black;
       position: absolute;
+      z-index:9999999999;
       top: 0px;
     }
 
