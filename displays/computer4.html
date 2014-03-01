@@ -1,0 +1,42 @@
+<!-- <html>
+<head>
+	<title>Magic Wand</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="scripts/soundmanager2-nodebug-jsmin.js"></script>
+	<script src="scripts/manager.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			var params = {
+				el: "#animationarea",
+				sounds: ["/displays/sounds/beep-7.mp3", "/displays/sounds/rain.mp3", "/displays/sounds/nyancat.ogg"]
+			}
+			var manager = new EffectsManager(params);
+			window.m = manager;
+
+			var socket = io.connect('http://j.local:8080'); // TODO CHANGE
+
+			socket.emit('register', { section: 4 });
+
+			socket.on('event', function(data) {
+                          console.log(data);
+			  if (data.demo === "lumos"){
+                            m.lumos(data.magnitude / 100);
+			  } else if (data.demo === "nyancat") {
+                            m.nyancat();
+			  } else if (data.demo === "choral") {
+
+			  } else {
+
+			  }
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="animationarea">
+	</div>
+</body>
+ -->

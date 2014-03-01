@@ -1,0 +1,148 @@
+<html>
+<head>
+	<title>Magic Wand</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="scripts/soundmanager2-nodebug-jsmin.js"></script>
+	<script src="scripts/manager.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="//connect.soundcloud.com/sdk.js"></script>
+	<script>
+		function setUpSoundCloud(){
+		  	SC.initialize({
+				client_id: "959e351866bf146679543c8df60590e3",
+				redirect_uri: "158.130.23.1/callback.html"
+			});
+			SC.connect(function(){
+				SC.get('/tracks/angels-clip', function(track){
+					track.play();
+				});
+			});
+		}
+	</script>
+	<script>
+          var socket;
+          function register(section) {
+            socket.emit('register', { section: section });
+            return false;
+          }
+          var _this = this;
+
+          // Find the right method, call on correct element
+			function launchFullScreen(element) {
+			  if(element.requestFullScreen) {
+			    element.requestFullScreen();
+			  } else if(element.mozRequestFullScreen) {
+			    element.mozRequestFullScreen();
+			  } else if(element.webkitRequestFullScreen) {
+			    element.webkitRequestFullScreen();
+			  }
+			}
+
+
+		$(document).ready(function(){
+			$('.fullscreen').click(function(){
+				launchFullScreen(document.documentElement);
+				$('body').append("<div id='black_overlay'></div>")
+			});
+			// Launch fullscreen for browsers that support it!
+			
+			var _this = this;
+			var params = {
+				el: "#animationarea",
+				sounds: ["/displays/sounds/1.mp3", "/displays/sounds/2.mp3", "/displays/sounds/3.mp3", "/displays/sounds/4.mp3", "/displays/sounds/boom.mp3", "/displays/sounds/5.mp3", "/displays/sounds/lumos.mp3"]
+			}
+			var manager = new EffectsManager(params);
+			window.m = manager;
+
+			socket = io.connect('http://j.local:8080'); // TODO CHANGE
+
+			socket.on('event', function(data) {
+                          console.log(data);
+			  if (data.demo === "lumos"){
+                            m.lumos(data.magnitude / 100);
+			  } else if (data.demo === "nyancat") {
+                m.nyancat();
+			  } else if (data.demo === "individual") {
+			  	m.individual();
+			  } else if (data.demo === "epic_final") {
+			  	m.soundtogether();
+			  } else if (data.demo === "boom") {
+			  	m.boom();
+			  }
+			});
+
+            $('#sec1').click(function(e) {
+              register(1);
+              manager.setSection(1);
+              $('#section-choice').remove()
+            });
+            $('#sec2').click(function(e) {
+              register(2);
+              manager.setSection(2);
+              $('#section-choice').remove()
+            });
+            $('#sec3').click(function(e) {
+              register(3);
+              manager.setSection(3);
+              $('#section-choice').remove()
+            });
+            $('#sec4').click(function(e) {
+              register(4);
+              manager.setSection(4);
+              $('#section-choice').remove()
+            });
+		});
+	</script>
+  <style>
+    #black_overlay {
+      width: 100%;
+      height: 2000px;
+      background: black;
+      position: absolute;
+      z-index:9999999999;
+      top: 0px;
+    }
+
+    #section-choice {
+      padding-top: 20%;
+      text-align: center;
+    }
+
+    .button {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .instructions_container {
+      padding-top: 30%;
+      text-align: center;
+      height: 300px;
+      line-height: 1.2em;
+    }
+    .instructions {
+      font-size: 50px;
+      text-align: center;
+    }
+
+    .none {
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- <div id="black_overlay" class="none">&nbsp;</div> -->
+  <div id="section-choice">
+    <button class="btn button fullscreen" id="sec1" type="button">Section 1</button>
+    <button class="btn button fullscreen" id="sec2" type="button">Section 2</button>
+    <button class="btn button fullscreen" id="sec3" type="button">Section 3</button>
+    <button class="btn button fullscreen" id="sec4" type="button">Section 4</button>
+  </div>
+  <div class="instructions_container none">
+    <p class="instructions">Please fullscreen this window and turn up your sound!</p>
+  </div>
+	<div id="animationarea">
+	</div>
+</body>

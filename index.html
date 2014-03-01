@@ -1,0 +1,221 @@
+<!DOCTYPE html> 
+<html>
+  <head> 
+    <title>Accelerometer</title> 
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <meta name="apple-touch-fullscreen" content="yes" /> 
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+
+    <!-- link rel="stylesheet" type="text/css" href="style.css" media="screen" /-->
+    <link rel="apple-touch-icon" href="gyroscope.png" />
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.5/hammer.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.5/jquery.hammer.min.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/js/app-interface.js"></script>
+    <script src="/static/js/app.js"></script>
+
+    <script src="/static/js/helpers.js"></script>
+    <script src="/static/js/interface.js"></script>
+
+    <style>
+        body { 
+            min-height:420px;
+            -webkit-user-select: none;
+        }     
+        body[orient="portrait"] { min-height:540px; }
+        body[orient="landscape"] { min-height:400px; }
+
+        .button {
+            text-align:center;
+            height: 150px;
+            margin-bottom: 20px;
+        }
+        #initialize{
+        }
+    </style>
+
+
+    <style>
+
+        .dark {
+            background: black;
+        }
+        .screen {
+            height: 100%;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+        .none {
+            display: none;
+        }
+
+        .switcher {
+            position: relative;
+            bottom: -90px;
+            width: 30%;
+            height: 40px;
+            text-align: center;
+            padding-top:60px;
+        }
+
+        #prev {
+            left: 0px;
+            background: gray;
+            float:left;
+
+        }
+
+        #next {
+            right:0px;
+            background: green;
+            float: right;
+
+        }
+
+        .btn-large {
+            width: 100%;
+        }
+
+        #position {
+            position: absolute;
+            bottom: 30px;
+            margin-left: 43%;
+            font-size: 200%;
+        }
+
+        .btn .btn-large .btn-block {
+            height: 150px;
+        }
+
+        .section_container {
+            width: 100%;
+            height: 60px;
+            display: inline-block;
+            margin:0px;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+        .section {
+            width: 24%;
+            display: inline-block;
+            margin:0px;
+            height: 100%;
+        }
+
+        #section1{background: red;}
+        #section2{background: yellow;}
+        #section3{background: green;}
+        #section4{background: blue;}
+
+
+        
+    </style>
+  </head> 
+ 
+  <body> 
+
+<!--     alpha (z-axis) (0, 360):<br/>
+    <span id="a">&nbsp;</span><br/>
+    <span id="b">&nbsp;</span><br/>
+    <span id="c">&nbsp;</span><br/>
+ -->
+    <div class="screen" id="1">
+        <button class="btn btn-large btn-block button" id="calibrate" type="button" demo="calibrate">Calibrate</button>
+    </div>
+
+    <div class="screen none" id="2">
+        <button class="btn btn-large btn-block button hold" type="button" demo="lumos">Lumos</button>
+    </div>
+
+    <div class="screen none" id="3">
+        <button class="btn btn-large btn-block button press" id="initialize" type="button" demo="individual">Individual Tracks</button>
+    </div>
+
+    <div class="screen none" id="4">
+        <button class="btn btn-large btn-block button press" id="initialize" type="button" demo="epic_final">Play Everything</button>
+    </div>
+
+    <div class="screen none" id="5">
+        <button class="btn btn-large btn-block button press" id="initialize" type="button" demo="boom">Boom, Boom, Boom</button>
+    </div>
+
+    <div class="screen none" id="6">
+        <button class="btn btn-large btn-block button press" id="initialize" type="button" demo="nyancat">NyanCat</button>
+    </div>
+
+    <div class="section_container">
+        <div class="section hidden" id="section1">&nbsp;</div>
+        <div class="section hidden" id="section2">&nbsp;</div>
+        <div class="section hidden" id="section3">&nbsp;</div>
+        <div class="section hidden" id="section4">&nbsp;</div>
+    </div>
+
+    <div class="none" id="values">&nbsp;</div>
+
+    <div class="switcher" id="prev">Prev</div>
+    <div class="switcher" id="next">Next</div>
+
+    <div id="position">1 of 3</div>
+
+
+
+<!-- 
+
+
+
+
+
+
+    beta (x-axis) (-180, 180):<br/>
+    <span id="beta">&nbsp;</span>
+
+    <br/>
+
+    gamma (y-axis) (-90, 90):<br/>
+    <span id="gamma">&nbsp;</span>
+
+
+    This tests both the accelerometer and gyroscope of.
+    <div id="bad-news">&nbsp;</div>
+    <div id="no"> 
+      Your browser does not support Device Orientation and Motion API. Try this sample with iPhone, iPod or iPad with iOS 4.2+.    
+    </div> 
+    <h2>Device Motion Events</h2>
+
+    acceleration
+    <br/>
+    X: <span id="x">&nbsp;</span>
+    <br/>
+    Y: <span id="y">&nbsp;</span>
+    <br/>
+    Z: <span id="z">&nbsp;</span>
+    <br/>
+
+    rotationRate  
+    <br/>
+    alpha:<br/>
+    <span id="r-alpha">&nbsp;</span>
+    <br/>
+
+    beta:<br/>
+    <span id="r-beta">&nbsp;</span>
+    <br/>
+
+    gamma:<br/>
+    <span id="r-gamma">&nbsp;</span>
+    <br/>
+
+    <br/>
+    interval: <span id="interval">&nbsp;</span>
+    <br/> -->
+
+  </body> 
+</html> 
