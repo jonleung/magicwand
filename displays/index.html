@@ -47,7 +47,7 @@
 				$('body').append("<div id='black_overlay'></div>")
 			});
 			// Launch fullscreen for browsers that support it!
-			
+
 			var _this = this;
 			var params = {
 				el: "#animationarea",
@@ -56,7 +56,7 @@
 			var manager = new EffectsManager(params);
 			window.m = manager;
 
-			socket = io.connect('http://j.local:8080'); // TODO CHANGE
+			socket = io.connect('/'); // TODO CHANGE
 
 			socket.on('event', function(data) {
                           console.log(data);
