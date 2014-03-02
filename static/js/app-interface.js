@@ -1,4 +1,4 @@
-var socket = io.connect('/'); // Dynamically Connect IP
+var socket = io.connect('/:' + PORT); // Dynamically Connect IP
 
 can_post = true;
 var post_section = function(section, magnitude, demo) {

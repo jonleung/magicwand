@@ -3,13 +3,12 @@ var app = express()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server);
 
-//
 app.use("/static", express.static(__dirname + '/static'));
 app.use("/", express.static(__dirname + '/displays'));
 app.use("/displays", express.static(__dirname + '/displays'));
 
 
-var PORT = 8080;
+var PORT = process.env.PORT;
 server.listen(PORT);
 console.log("Listening on port " + PORT);
 
