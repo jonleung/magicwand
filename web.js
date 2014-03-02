@@ -6,6 +6,8 @@ var app = express()
 
 app.use("/static", express.static(__dirname + '/static'));
 app.use("/", express.static(__dirname + '/displays'));
+app.use("/displays", express.static(__dirname + '/displays'));
+
 
 var PORT = 8080;
 server.listen(PORT);
