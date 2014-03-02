@@ -56,7 +56,7 @@
 			var manager = new EffectsManager(params);
 			window.m = manager;
 
-			socket = io.connect('/:' + process.env.PORT); // TODO CHANGE
+			socket = io.connect('/'); // TODO CHANGE
 
 			socket.on('event', function(data) {
                           console.log(data);

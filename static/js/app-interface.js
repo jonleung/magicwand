@@ -1,4 +1,4 @@
-var socket = io.connect('/:' + process.env.PORT); // Dynamically Connect IP
+var socket = io.connect('/'); // Dynamically Connect IP
 
 can_post = true;
 var post_section = function(section, magnitude, demo) {
@@ -14,7 +14,6 @@ var post_section = function(section, magnitude, demo) {
     }, 200);
   }
 };
-
 
 var post_calibrate = function (start_angle, end_angle) {
   socket.emit('calibrate', { start_angle: start_angle, end_angle: end_angle });
